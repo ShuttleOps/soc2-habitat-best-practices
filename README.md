@@ -1,0 +1,1 @@
+# SOC2 Best Practices with Chef Habitat and ShuttleOps

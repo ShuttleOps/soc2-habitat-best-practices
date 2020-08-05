@@ -1,0 +1,14 @@
+# IDEs
+.idea/
+
+# Chef Infra
+*.lock.json
+
+# Chef Habitat
+results/
+
+# Assets
+agent_assets/*.rpm
+
+# Vagrant
+.vagrant/
