@@ -1,5 +1,14 @@
 # Qualys Cookbook
 
+## Supported Distributions
+
+- Ubuntu
+- Debian
+- Redhat 
+- Centos 
+
+(Tested on Centos7 and Ubuntu 18.04)
+
 ## Required Attributes:
 
 - pkg_name: The Qualys package filename, as appearing in /opt/agent_assets or in pkg_remote_source
