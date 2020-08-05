@@ -1,2 +1,2 @@
 [chef_license]
-acceptance = "accept-no-persist"
+acceptance = 'accept-no-persist'

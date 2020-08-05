@@ -9,6 +9,8 @@ results/
 
 # Assets
 agent_assets/*.rpm
+agent_assets/*.deb
 
 # Vagrant
 .vagrant/
+*.log

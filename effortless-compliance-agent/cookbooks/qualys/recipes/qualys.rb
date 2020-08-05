@@ -5,21 +5,41 @@
 # Copyright:: 2020, The Authors, All Rights Reserved.
 
 directory node['qualys']['assets_dir'] do
-  recursive   true
-  mode        '0755'
-  action      :create
+  recursive true
+  mode '0755'
+  action :create
 end
 
-remote_file 'qualys_rpm' do
-  path             node['qualys']['rpm_path']
-  group            'root'
-  owner            'root'
-  source           node['qualys']['rpm_remote_source']
-  only_if          "#{node['qualys']['is_remote_rpm']}"
+remote_file 'qualys_pkg' do
+  path "#{node['qualys']['assets_dir']}/#{node['qualys']['pkg_name']}"
+  group 'root'
+  owner 'root'
+  source node['qualys']['pkg_remote_source']
+  only_if "#{node['qualys']['is_remote_pkg']}"
 end
 
-package 'qualys-cloud-agent' do
-  source           node['qualys']['rpm_path']
+if platform_family?('rhel')
+  rpm_package 'qualys-cloud-agent' do
+    source "#{node['qualys']['assets_dir']}/#{node['qualys']['pkg_name']}"
+  end
+elsif platform_family?('debian')
+  directory "#{shell_out!('hab pkg path core/dpkg').stdout.strip}/var/lib/dpkg" do
+    action :delete
+    recursive true
+    only_if { !File.symlink?("#{shell_out!('hab pkg path core/dpkg').stdout.strip}/var/lib/dpkg") }
+  end
+
+  link "#{shell_out!('hab pkg path core/busybox-static').stdout.strip}/bin/ps" do
+    to  "/bin/ps"
+  end
+
+  link "#{shell_out!('hab pkg path core/dpkg').stdout.strip}/var/lib/dpkg" do
+    to  "/var/lib/dpkg"
+  end
+
+  dpkg_package 'qualys-cloud-agent' do
+    source "#{node['qualys']['assets_dir']}/#{node['qualys']['pkg_name']}"
+  end
 end
 
 execute 'link-agent' do

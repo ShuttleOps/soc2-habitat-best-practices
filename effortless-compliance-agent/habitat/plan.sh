@@ -9,5 +9,6 @@ pkg_scaffolding="chef/scaffolding-chef-infra"
 pkg_svc_user=("root")
 pkg_deps=(
     core/rpm
+    core/dpkg
 )
 scaffold_policy_name="base"
