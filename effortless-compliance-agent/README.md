@@ -1,3 +1,7 @@
+# effortless-compliance-agent
+
+A [Chef Effortless](https://github.com/chef/effortless) package which contains and runs the [qualys Chef Infra Cookbook](./cookbooks/qualys).
+
 ## Testing in Vagrant
 
 ```
