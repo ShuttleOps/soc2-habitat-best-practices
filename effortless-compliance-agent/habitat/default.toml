@@ -1,2 +1,9 @@
 [chef_license]
 acceptance = 'accept-no-persist'
+
+[attributes.qualys]
+is_remote_pkg = true
+pkg_remote_source = ""
+pkg_name = ""
+activation_id = ""
+customer_id = ""
